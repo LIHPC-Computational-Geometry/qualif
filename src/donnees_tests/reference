@@ -1,0 +1,16 @@
+     ************************************
+         MESURE DE QUALITE DE MAILLAGE   
+     ************************************
+ 
+ APPLICATION DU CRITERE : Conditionnement
+Analyse de qualite pour le volume ZONE
+Resultats pour pyramide
+nbr = 75  valides = 75
+moyenne 3.53484 ecart type 0.132489
+min = 3.3764 max = 4.0299
+
+Resultats pour hexaedre
+nbr = 300  valides = 300
+moyenne 2.00712 ecart type 0.923848
+min = 1.14486 max = 4.04405
+

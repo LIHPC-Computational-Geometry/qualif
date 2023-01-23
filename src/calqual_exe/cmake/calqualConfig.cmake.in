@@ -1,0 +1,9 @@
+include(CMakeFindDependencyMacro)
+find_dependency (qualif)
+
+@PACKAGE_INIT@
+
+set (Calqual_VERSION @QUALIF_VERSION@)
+set_and_check (Calqual_RUNTIME_DIR   "@PACKAGE_RUNTIME_INSTALL_DIR@")
+check_required_components (Calqual)
+

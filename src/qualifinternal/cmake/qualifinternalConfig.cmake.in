@@ -1,0 +1,12 @@
+include(CMakeFindDependencyMacro)
+find_dependency (Lima)
+
+@PACKAGE_INIT@
+
+set (qualifinternal_VERSION @QUALIF_VERSION@)
+set_and_check (qualifinternal_INCLUDE_DIR   "@PACKAGE_INCLUDE_INSTALL_DIR@")
+set_and_check (qualifinternal_LIB_DIR   "@PACKAGE_LIB_INSTALL_DIR@")
+check_required_components (qualifinternal)
+
+# Fournir l'accès aux services des cibles (fichier non inclus automatiquement) :
+include(${CMAKE_CURRENT_LIST_DIR}/qualifinternalTargets.cmake)
