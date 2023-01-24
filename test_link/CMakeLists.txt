@@ -3,11 +3,11 @@ project(test_link)
 
 set(CMAKE_CXX_STANDARD 14)
 
-find_package (Qualif REQUIRED)
+find_package (qualif REQUIRED)
 
 add_executable(test_link main.cpp)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qualif::Qualif)
+target_link_libraries(${PROJECT_NAME} PRIVATE qualif::qualif)
 
 enable_testing()
 add_test(

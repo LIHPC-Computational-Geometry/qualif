@@ -1,5 +1,5 @@
 #include <iostream>
-#include <qualif/Qualif.h>
+#include <Qualif.h>
 
 int main() {
     Qualif::AfficheCriteres();
