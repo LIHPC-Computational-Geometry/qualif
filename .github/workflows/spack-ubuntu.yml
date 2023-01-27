@@ -1,4 +1,4 @@
-name: spack-ubuntu
+name: Spack/Ubuntu
 
 on:
   workflow_dispatch:
@@ -8,57 +8,8 @@ on:
     branches: [ main ]
 
 jobs:
-  init:
-    name: ${{ matrix.config }}
-    # The CMake configure and build commands are platform agnostic and should work equally
-    # well on Linux, Windows or Mac.
-    runs-on: ubuntu-latest
-    container:
-      image: lihpccg/mgx-ubuntu.22.04-spack.0.19.0:latest
-    strategy:
-      fail-fast: false
-      matrix:
-        config: [Release, Debug]
-
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 2 # seems to be needed by codecov
-          submodules: recursive
-
-      - name: Initialize the dev environment
-        shell: bash
-        run : |
-          source /spack/share/spack/setup-env.sh
-          git clone --depth=1 https://github.com/LIHPC-Computational-Geometry/spack_recipes_meshing.git
-          spack repo add ./spack_recipes_meshing/meshing_repo
-          spack repo add ./spack_recipes_meshing/supersede_repo
-
-      - name: Build and install
-        shell: bash
-        run: |
-          source /spack/share/spack/setup-env.sh 
-          spack env activate meshing-env
-          spack add qualif
-          # we use GITHUB_WORKSPACE instead of github.Workspace because in containers it
-          # seems to be incorrect (see https://github.com/actions/runner/issues/2058)
-          spack develop -p $GITHUB_WORKSPACE --no-clone qualif@2.3.5
-          spack install --no-checksum
-          # now we build using cmake with spack provided build variables
-          spack load --only dependencies --sh qualif > spack_env_file.sh
-          source spack_env_file.sh
-          cmake -DCMAKE_INSTALL_PREFIX=${{env.INSTALL_DIR}} -S . -B build
-          cmake --build build
-          #make test
-
-      - name: Test c++ lib install
-        shell: bash
-        run: |
-          source /spack/share/spack/setup-env.sh
-          spack env activate meshing-env
-          spack load qualif
-          cd test_link/
-          cmake -S . -B build_exe
-          cmake --build build_exe
-          cd build_exe
-          ctest
+  call:
+    name: Call lihpccg Spack/Ubuntu
+    uses: LIHPC-Computational-Geometry/lihpccg-ci/.github/workflows/spack-ubuntu.yml@main
+    with:
+      run-tests: false
