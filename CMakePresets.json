@@ -4,7 +4,7 @@
       {
         "name": "ci",
         "cacheVariables": {
-          "CMAKE_PREFIX_PATH": "$env{INSTALL_DIR}/lima"
+          "Lima_ROOT": "$env{INSTALL_DIR}/lima"
         }
       }
     ]
